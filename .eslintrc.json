@@ -19,7 +19,8 @@
         "guard-for-in": "off",
         "import/no-cycle": "off", 
         "no-restricted-globals": "off", 
-        "class-methods-use-this": "off",       
+        "class-methods-use-this": "off",
+        "eol-last": "off",              
         "consistent-return": "off"        
     }
 }
