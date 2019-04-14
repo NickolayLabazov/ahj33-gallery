@@ -29,5 +29,17 @@ export default class Image {
       document.body.removeChild(this.imageCont);
       Gallery.insertMesage(this.div, 'Неверный URL изображения');
     });
+    this.addListener();
+    this.imageDel.style.cursor = 'pointer';
+  }
+
+  addListener() {
+    this.imageDel.addEventListener('click', () => this.del());
+  }
+
+  del() {
+    this.imageCont.setAttribute('data-id', 'del');
+    const del = document.querySelector('[data-id = del]');
+    document.body.removeChild(del);
   }
 }

@@ -1,22 +1,24 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpg|gif)$/i,
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jpg|gif|ico)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: {
-              limit: 8192,
+              outputPath: 'img',
             },
           },
         ],
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -27,7 +29,7 @@ module.exports = {
   },
 
   entry: {
-    app: './src/js/app.js',
+    app: './src/index.js',
   },
 
   output: {
@@ -35,4 +37,16 @@ module.exports = {
     filename: 'index.js',
     publicPath: 'dist/',
   },
+
+  plugins: [new HtmlWebpackPlugin({
+    inject: false,
+    hash: true,
+    template: './src/index.html',
+    filename: 'index.html',
+  }),
+  new CopyPlugin([
+    { from: 'src/img', to: 'img' },
+
+  ]),
+  ],
 };
